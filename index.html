@@ -41,6 +41,16 @@
       l dx dy: risca uma distancia dx,dy
     -->
 
+    <!-- A aparencia dos elementos ta definida no CSS -->
+
+    <!-- Da pra fazer a ULA assim -->
+    <g transform="translate(100, 400) rotate(90)">
+      <!-- Desenha um trapezio centrado nas coordenadas do translate(x, y) -->
+      <!-- Pra reposicionar, so precisa alterar os parametros do translate -->
+      <polygon points="-25,-50 -25,50 25,25, 25,-25"/>
+    </g>
+
+    <!-- Retangulos p/ fazer as memorias e o banco de registradores -->
     <rect x="100" y="100" width="100" height="100"/>
     <rect x="400" y="200" width="100" height="100"/>
     <rect x="350" y="400" width="100" height="100"/>
@@ -64,14 +74,29 @@
         <mpath xlink:href="#caminhoBlue"/>
       </animateMotion>
     </circle>
+
+    <!-- Caixa de texto (p/ instrucoes, memoria etc) -->
+    <g class="text-box" transform="translate(600, 100)">
+      <rect x="0" y="0" width="120" height="200"/>
+      <rect class="selection" x="0" y="0em" width="120" height="1.2em"/>
+      <text x="0" y="0">
+        <tspan x="0" dy="1.2em"> LW $R0 0 </tspan>
+        <tspan x="0" dy="1.2em"> LW $R1 4 </tspan>
+        <tspan x="0" dy="1.2em"> NOOP </tspan>
+        <tspan x="0" dy="1.2em"> NOOP </tspan>
+        <tspan x="0" dy="1.2em"> ADD $R2 $R0 $R1 </tspan>
+      </text>
+    </g>
+
   </svg>
 
   <div class="centered">
-    <input type="button" id="triggerBtn" value="Animar">
+    <input type="button" id="animateBtn" value="Animar">
+    <input type="button" id="advanceBtn" value="Avançar instruçao">
   </div>
 
   <script src="instruction.js"></script>
-  <script src="script.js"></script>
+  <script src="cpu.js"></script>
   <script src="animation.js"></script>
 </body>
 </html>

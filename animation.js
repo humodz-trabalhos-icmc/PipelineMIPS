@@ -1,3 +1,11 @@
+// jshint esversion: 6
+// jshint globalstrict: true
+// jshint devel: true
+// jshint browser: true
+/* globals $ */
+'use strict';
+
+
 var animRed = $('#animRed');
 var animBlue = $('#animBlue');
 
@@ -9,11 +17,24 @@ $(document).ready(function() {
     circleRed.css('visibility', 'hidden');
     circleBlue.css('visibility', 'hidden');
 
-    $('#triggerBtn').click(function() {
+    $('#animateBtn').click(function() {
         console.log('Botao apertado');
         triggerRed();
     });
+
+    $('#advanceBtn').click(advanceIndex);
 });
+
+
+// Avança a selecao verde uma linha na lista de instrucoes
+let sel_index = 0;
+function advanceIndex() {
+    let line_count = $('.text-box tspan').length;
+    let sel = $('.text-box .selection');
+
+    sel_index = (sel_index + 1) % line_count;
+    sel.attr('y', (sel_index * 1.2).toFixed(2) + 'em');
+}
 
 
 function triggerRed() {
@@ -41,6 +62,7 @@ function triggerBlue() {
     setTimeout(function() {
         // circleBlue.css('visibility', 'hidden');
         console.log('Azul chegou!');
+        advanceIndex();
     }, time_ms);
 }
 

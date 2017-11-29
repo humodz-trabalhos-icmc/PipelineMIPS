@@ -1,6 +1,7 @@
 // jshint esversion: 6
 // jshint globalstrict: true
 // jshint devel: true
+// jshint browser: true
 /* globals Instruction, clear */
 'use strict';
 

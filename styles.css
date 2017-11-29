@@ -10,11 +10,14 @@ svg {
     text-align: center;
 }
 
-rect {
+rect, polygon {
     stroke: black;
     stroke-width: 2;
     fill: darkgray;
-    /* round corners */
+}
+
+rect {
+    /* rounded corners */
     rx: 10;
     ry: 10;
 }
@@ -27,4 +30,21 @@ path {
     stroke: dimgray;
     stroke-width: 3;
     fill: transparent;
+}
+
+
+.text-box {
+    font-family: monospace;
+    font-size: 12px;
+}
+
+.text-box rect {
+    stroke-width: 0;
+    fill: white;
+    rx: 0;
+    ry: 0;
+}
+
+.text-box .selection {
+    fill: lawngreen;
 }
