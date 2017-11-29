@@ -3,9 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <title>Pipeline MIPS</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+  </script>
 </head>
 <body>
+  <svg xmlns:html="http://www.w3.org/1999/xhtml"
+          viewBox="0 0 800 600"
+          id="canvas" width="800" height="600">
+    <!--
+      viewBox eh o tamanho logico do canvas. Se voce nao mexer nele,
+      da p/ alterar width e height a vontade que nao precisa alterar
+      as coordenadas no codigo abaixo
+    -->
+
+    <!--
+      RESUMO <path>
+      maiusculo:  posicao absoluta
+      minusculo: distancia
+      X cresce p/ esquerda
+      Y cresce p/ baixo
+
+      O caminho eh uma sequencia dessas diretivas:
+
+      M x y: posiciona a caneta em x,y sem desenhar
+      m dx dy: anda a caneta uma distancia dx,dy sem desenhar
+
+      H x: risca horizontalmente ate a posicao x
+      h dx: risca horizontalmente uma distancia dx
+
+      V y: risca verticalmente ate a posicao y
+      v dy: risca verticalmente uma distancia dy
+
+      L x y: risca ate a posicao x,y
+      l dx dy: risca uma distancia dx,dy
+    -->
+
+    <rect x="100" y="100" width="100" height="100"/>
+    <rect x="400" y="200" width="100" height="100"/>
+    <rect x="350" y="400" width="100" height="100"/>
+
+    <path id="caminhoRed"  d="M 200 150 h 50 v 100 h 150"></path>
+    <path id="caminhoBlue" d="M 450 300 v 40 h -50 v 60"></path>
+
+    <!--
+      fill=freeze faz os circulos ficarem parados no fim do caminho quando
+      a animacao acaba. Se tirar, eles teleportam para 0,0
+    -->
+
+    <circle id="circleRed" fill="red">
+      <animateMotion id="animRed" dur="2s" fill="freeze" begin="indefinite">
+        <mpath xlink:href="#caminhoRed"/>
+      </animateMotion>
+    </circle>
+
+    <circle id="circleBlue" fill="blue">
+      <animateMotion id="animBlue" dur="2s" fill="freeze" begin="indefinite">
+        <mpath xlink:href="#caminhoBlue"/>
+      </animateMotion>
+    </circle>
+  </svg>
+
+  <div class="centered">
+    <input type="button" id="triggerBtn" value="Animar">
+  </div>
+
   <script src="instruction.js"></script>
   <script src="script.js"></script>
+  <script src="animation.js"></script>
 </body>
 </html>

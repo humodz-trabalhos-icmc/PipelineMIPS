@@ -1,0 +1,31 @@
+svg {
+    border: 1px solid black;
+    background: lavender;
+    /* center align */
+    display: block;
+    margin: auto;
+}
+
+.centered {
+    text-align: center;
+}
+
+rect {
+    stroke: black;
+    stroke-width: 2;
+    fill: darkgray;
+    /* round corners */
+    rx: 10;
+    ry: 10;
+}
+
+circle {
+    visibility: hidden;
+    r: 5;
+}
+
+path {
+    stroke: dimgray;
+    stroke-width: 3;
+    fill: transparent;
+}
