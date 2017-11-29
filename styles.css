@@ -20,7 +20,6 @@ rect {
 }
 
 circle {
-    visibility: hidden;
     r: 5;
 }
 

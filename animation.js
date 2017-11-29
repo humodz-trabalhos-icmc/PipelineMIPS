@@ -6,6 +6,9 @@ var circleBlue = $('#circleBlue');
 
 
 $(document).ready(function() {
+    circleRed.css('visibility', 'hidden');
+    circleBlue.css('visibility', 'hidden');
+
     $('#triggerBtn').click(function() {
         console.log('Botao apertado');
         triggerRed();
