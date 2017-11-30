@@ -43,27 +43,34 @@
 
     <!-- A aparencia dos elementos ta definida no CSS -->
 
-    <!-- Da pra fazer a ULA assim -->
+    <!-- ULA para incrementar o PC -->
     <g transform="translate(165, 325) scale(0.75)">
-      <!-- Desenha um trapezio centrado nas coordenadas do translate(x, y) -->
-      <!-- Pra reposicionar, so precisa alterar os parametros do translate -->
       <polygon points="-25,-50 -25,50 25,25, 25,-25"/>
     </g>
 	
-	
+	<!--memoria instrução-->
 	<rect x="120" y="400" width="75" height="75"/>
+	<path id="PC_IFID" d="M 195 435 v 0 h 25 v 0"></path>	
 
+	<!--Bloco do PC-->
  	<rect x="50" y="300" width="30" height="75"/>
+
+	<path id="PC_MEMINST" d="M 90 335 v 100 h 30 v 0"></path>
 
 
 	<text x="110" y="315">
 		<tspan> 4 </tspan>
 	</text>
-	<path id="caminhoBlue" d="M 80 335 v 0 h 65 v 0"></path>
-	<path id="caminhoBlue" d="M 120 310 v 0 h 25 v 0"></path>	
+	<path id="PC_ADDPC" d="M 80 335 v 0 h 65 v 0"></path>
+	<path id="INC_4" d="M 120 310 v 0 h 25 v 0"></path>	
+
+	<path id="ADDPC_IDIF" d="M 184 325 h 10 v -60 h 30"></path>
+	<path id="ADDPC_MUX" d="M 193 265 h -20 v -165 h -65 v 45"></path>
 
 	<!--mux-->
-	<rect x="100" y="145" width="75" height="30"/>
+	<rect x="50" y="145" width="75" height="30"/>
+
+	<path id="MUX_PC" d="M 85 176 v 50 h -50 v 110 h 15"></path>	
 
     <g class="text-box" transform="translate(250, 250)">
       <!-- Desenha um trapezio centrado nas coordenadas do translate(x, y) -->
@@ -83,6 +90,14 @@
 		  <tspan> IF/ID </tspan>
 	  </text>
     </g>
+
+	<path id="IFID_IDEX" d="M 281 265 h 250"></path>
+
+	<!--banco de registradores-->
+	<rect x="350" y="350" width="75" height="100"/>
+
+	<path id="REGSa_IDEX" d="M 425 375 h 100"></path>
+	<path id="REGSb_IDEX" d="M 425 425 h 100"></path>
 
 	<g class="text-box" transform="translate(550, 250)">
       <!-- Desenha um trapezio centrado nas coordenadas do translate(x, y) -->
