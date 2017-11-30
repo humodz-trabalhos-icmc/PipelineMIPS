@@ -31,7 +31,9 @@ var _opcodes = {
     LW: new OpInfo('loadStore', 'i'),
     SW: new OpInfo('loadStore', 'i'),
 
-    BNE: new OpInfo('branch', 'i', (a, b) => (a !== b)),
+    // Branch instructions use ALU zero to determine if the
+    // branch condition was met.
+    BNE: new OpInfo('branch', 'i', (a, b) => Number(a & b)),
 };
 
 
