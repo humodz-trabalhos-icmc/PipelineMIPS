@@ -24,7 +24,7 @@ class Cpu {
 
             this.if_id = {ir: noop, newPc: 0,};
             this.id_ex = {ir: noop, a: 0, b: 0,};
-            this.ex_mem = {ir: noop, aluOutput: 0, cond: false,};
+            this.ex_mem = {ir: noop, aluOutput: 0, zero: 0, branchAddress: 0,};
             this.mem_wb = {ir: noop, aluOutput: 0, lmd: 0,};
         } else {
             // Copy attributes from @that
@@ -112,9 +112,9 @@ class Cpu {
         console.log(this.if_id.ir.asText);
 
         let newPc;
-        if(prev.ex_mem.cond && prev.ex_mem.ir.category === 'branch') {
+        if(prev.ex_mem.zero && prev.ex_mem.ir.category === 'branch') {
             console.log('Taking branch');
-            newPc = prev.ex_mem.aluOutput;
+            newPc = prev.ex_mem.branchAddress;
         } else {
             newPc = prev.programCounter + 4;
         }
@@ -183,12 +183,14 @@ class Cpu {
     }
 
     updateExBranch(prev) {
-        this.ex_mem.aluOutput = prev.id_ex.newPc + (prev.id_ex.imm << 2);
-
-        let compare = prev.id_ex.ir.aluFunction;
         let a = prev.id_ex.a;
         let b = prev.id_ex.b;
-        this.ex_mem.cond = compare(a, b);
+
+        this.ex_mem.aluOutput = prev.id_ex.ir.aluFunction(a, b);
+        this.ex_mem.zero = Number(this.ex_mem.aluOutput === 0);
+
+        this.ex_mem.branchAddress = prev.id_ex.newPc + (prev.id_ex.imm << 2);
+
         return this;
     }
 
