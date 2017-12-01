@@ -20,12 +20,12 @@ class Cpu {
                 this.registers['$R' + i] = 0;
             }
 
-            let noop = new Instruction('NOOP');
+            let nop = new Instruction('NOP');
 
-            this.if_id = {ir: noop, newPc: 0,};
-            this.id_ex = {ir: noop, a: 0, b: 0,};
-            this.ex_mem = {ir: noop, aluOutput: 0, zero: 0, branchAddress: 0,};
-            this.mem_wb = {ir: noop, aluOutput: 0, lmd: 0,};
+            this.if_id = {ir: nop, newPc: 0,};
+            this.id_ex = {ir: nop, a: 0, b: 0,};
+            this.ex_mem = {ir: nop, aluOutput: 0, zero: 0, branchAddress: 0,};
+            this.mem_wb = {ir: nop, aluOutput: 0, lmd: 0,};
         } else {
             // Copy attributes from @that
             this.programCounter = that.programCounter;

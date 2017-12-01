@@ -20,7 +20,7 @@ function noop(a, b) {
 
 
 var _opcodes = {
-    NOOP: new OpInfo('alu', 'r', noop),
+    NOP: new OpInfo('alu', 'r', noop),
     ADD:  new OpInfo('alu', 'r', (a, b) => a + b),
     SUB:  new OpInfo('alu', 'r', (a, b) => a - b),
     AND:  new OpInfo('alu', 'r', (a, b) => a & b),
@@ -31,9 +31,9 @@ var _opcodes = {
     LW: new OpInfo('loadStore', 'i'),
     SW: new OpInfo('loadStore', 'i'),
 
-    // Branch instructions use ALU zero to determine if the
-    // branch condition was met.
-    BNE: new OpInfo('branch', 'i', (a, b) => Number(a & b)),
+    // Branches are taken when alu result is zero
+    BEQ: new OpInfo('branch', 'i', (a, b) => Number(a !== b)),
+    BNE: new OpInfo('branch', 'i', (a, b) => Number(a === b)),
 };
 
 
@@ -50,7 +50,7 @@ class Instruction {
         Object.assign(this, _opcodes[this.op]);
 
         if(this.format === 'r') {
-            if(this.op === 'NOOP') {
+            if(this.op === 'NOP') {
                 this.rd = '$0';
                 this.rs = '$0';
                 this.rt = '$0';
@@ -85,7 +85,7 @@ class Instruction {
             this.offset = +array[1];
         } else {
             console.log('Unrecognized instruction:', string);
-            Object.assign(this, new Instruction('NOOP'));
+            Object.assign(this, new Instruction('NOP'));
         }
     }
 }
