@@ -5,7 +5,120 @@
 /* globals $ */
 'use strict';
 
-let svg = $('svg');
+
+let svg;
+let total_dur = 3;
+let divisions = 12;
+
+let isPlaying = false;
+let doingOneStep = false;
+
+
+function activateAnimations() {
+    if(doingOneStep) {
+        return;
+    }
+
+    doingOneStep = true;
+
+    setTimeout(function() {
+        doingOneStep = false;
+
+        if(isPlaying) {
+            activateAnimations();
+        }
+    }, 500 + 1000 * total_dur);
+
+    for(let i = 0; i <= divisions; i++) {
+        setAnimTimeout(i);
+    }
+
+}
+
+
+function setAnimTimeout(wait) {
+    return setTimeout(function() {
+        $('.anim' + wait).each(function(i, elem) {
+            elem.beginElement();
+        });
+    }, 1000 * total_dur * wait / divisions);
+}
+
+
+$(document).ready(onReady);
+
+function onReady() {
+    svg = $('svg');
+
+    $('#stepBtn').click(function() {
+        activateAnimations();
+    });
+
+    $('#playBtn').click(function() {
+        isPlaying = true;
+        activateAnimations();
+    });
+
+    $('#stopBtn').click(function() {
+        isPlaying = false;
+    });
+
+
+
+    $('path').each(function(idx, elem) {
+        elem = $(elem);
+        let classes = elem
+            .attr('class')
+             .split(' ')
+             .filter((str) => str !== '');
+
+
+        let wait = 0;
+        let weight = divisions;
+
+        $.each(classes, function(i, theClass) {
+            let re = /([a-z]+)(\d+)/g;
+
+            let matches = re.exec(theClass);
+            if(matches === null) {
+                return;
+            }
+
+            let name = matches[1];
+            let value = +matches[2];
+
+            if(name == 'espera') {
+                wait = value;
+            } else if(name === 'peso') {
+                weight = value;
+            }
+        });
+
+        let dur = total_dur * weight / divisions;
+
+        makeAnimatedCircle(elem.attr('id'), wait, dur);
+    });
+}
+
+
+function makeAnimatedCircle(pathId, wait, dur) {
+    let circle = makeSvg('circle', {});
+
+    let animMotion = makeSvg('animateMotion', {
+        'class': 'anim' + wait,
+        begin: 'indefinite',
+        dur: dur + 's',
+    });
+
+    let mpath = makeSvg('mpath', {});
+
+    mpath.setAttributeNS("http://www.w3.org/1999/xlink", "href", '#' + pathId);
+
+    animMotion.appendChild(mpath);
+    circle.appendChild(animMotion);
+    svg.append(circle);
+}
+
 
 function makeSvg(tag, attrs) {
     var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
@@ -14,191 +127,3 @@ function makeSvg(tag, attrs) {
     }
     return el;
 }
-
-
-function makeCircle(pathId, classes) {
-    classes = classes || "";
-    classes = "anim " + classes;
-
-    let circle = makeSvg('circle', {'class': classes, visibility: 'hidden'});
-    let animMotion = makeSvg('animateMotion', {begin: 'indefinite'});
-    let mpath = makeSvg('mpath', {});
-
-    mpath.setAttributeNS("http://www.w3.org/1999/xlink", "href", pathId);
-
-    animMotion.appendChild(mpath);
-    circle.appendChild(animMotion);
-    svg.append(circle);
-
-    return animMotion;
-}
-
-
-function Path(id) {
-    return {id: id};
-}
-
-
-$(document).ready(function () {
-    let max_division = 5;
-
-    for(let i = 1; i <= max_division; i++) {
-        let paths = $('path.divby' + i);
-
-
-    }
-});
-
-function old() {
-    var paths = [
-        Path('#MEMINST_IFID'),
-        Path('#PC_MEMINST'),
-        Path('#PC_ADDPC'),
-        Path('#INC_4'),
-        Path('#ADDPC_IDIF'),
-        Path('#ADDPC_MUX'),
-        Path('#MUX_PC'),
-        Path('#IFID_IDEX'),
-        Path('#IFID_OUT'),
-        Path('#IFID_OUT_REGa'),
-        Path('#IFID_OUT_REGb'),
-        Path('#REGSa_IDEX'),
-        Path('#REGSb_IDEX'),
-        Path('#IFID_OUT_SIGEXT'),
-        Path('#SIGEXT_IDEX'),
-        Path('#IFID_OUT_RT'),
-        Path('#IFID_OUT_RD'),
-        Path('#IDEX_EXMEM'),
-        Path('#IDEX_ADD'),
- 		Path('#IDEX_SHIFT_MUX'),
-        Path('#IDEX_SHIFT'),
-        Path('#SHIFT_ADD'),
-        Path('#ADD_EXMEM'),
-        Path('#IDEX_ULA'),
-        Path('#IDEX_MUX'),
-        Path('#MUX_ULA'),
-        Path('#IDEX_MUX2'),
-        Path('#IDEX_MUXRT'),
-        Path('#IDEX_MUXRD'),
-        Path('#MUX_EXMEM'),
-        Path('#ULA_EXMEM'),
-        Path('#MUX_EXMEM'),
- 		Path('#EXMEM_DMEMa_MEMWB'),
-        Path('#EXMEM_DMEMa'),
-        Path('#EXMEM_MEMWBa'),
-        Path('#EXMEM_DMEMb'),
-        Path('#DMEM_MEMWB'),
-        Path('#EXMEN_MUX'),
-        Path('#MEMWB_MUXa'),
-        Path('#MEMWB_MUXb'),
-        Path('#MUX_REGS'),
-        Path('#MEMWB_REGS'),
-    ];
-
-    paths.forEach(function(path) {
-        makeCircle(path.id);
-    });
-
-
-    $('.anim animateMotion').attr({
-        begin: 'indefinite',
-        dur: '2s',
-        fill: 'freeze',
-    });
-}
-
-
-function go() {
-    let circles = $('circle.anim');
-
-    circles.attr('visibity', 'visible');
-}
-
-
-
-/*
-var animRed = $('#animRed');
-var animBlue = $('#animBlue');
-
-var circleRed = $('#circleRed');
-var circleBlue = $('#circleBlue');
-
-
-$(document).ready(function() {
-    circleRed.css('visibility', 'hidden');
-    circleBlue.css('visibility', 'hidden');
-
-    $('#animateBtn').click(function() {
-        console.log('Botao apertado');
-        triggerRed();
-    });
-
-    $('#advanceBtn').click(advanceIndex);
-});
-
-
-// Avança a selecao verde uma linha na lista de instrucoes
-let sel_index = 0;
-function advanceIndex() {
-    let line_count = $('.text-box tspan').length;
-    let sel = $('.text-box .selection');
-
-    sel_index = (sel_index + 1) % line_count;
-    sel.attr('y', (sel_index * 1.2).toFixed(2) + 'em');
-}
-
-
-function triggerRed() {
-    animRed[0].beginElement();
-    circleRed.css('visibility', 'visible');
-    console.log('Vermelho saiu!');
-
-    var time_ms = cssTimeToMs(animRed.attr('dur'));
-
-    setTimeout(function() {
-        // circleRed.css('visibility', 'hidden');
-        console.log('Vermelho chegou!');
-        triggerBlue();
-    }, time_ms);
-}
-
-
-function triggerBlue() {
-    animBlue[0].beginElement();
-    circleBlue.css('visibility', 'visible');
-    console.log('Azul saiu!');
-
-    var time_ms = cssTimeToMs(animBlue.attr('dur'));
-
-    setTimeout(function() {
-        // circleBlue.css('visibility', 'hidden');
-        console.log('Azul chegou!');
-        advanceIndex();
-    }, time_ms);
-}
-
-
-function cssTimeToMs(time_string) {
-    // https://stackoverflow.com/questions/30439694
-    var num = parseFloat(time_string, 10),
-        unit = time_string.match(/m?s/),
-        milliseconds;
-
-    if (unit) {
-        unit = unit[0];
-    }
-
-    switch (unit) {
-        case "s": // seconds
-            milliseconds = num * 1000;
-            break;
-        case "ms": // milliseconds
-            milliseconds = num;
-            break;
-        default:
-            milliseconds = 0;
-            break;
-    }
-
-    return milliseconds;
-}*/
