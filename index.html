@@ -336,6 +336,57 @@
 
 	<!--INICIO SINAIS E UNIDADE DE CONTROLE-->
 
+
+	<g class="text-box" transform="translate(530, 205)">
+		<rect style="stroke: red; fill: white" x="0" y="0" width="30" height="40"/>
+		<text x="10" y="25">
+			<tspan> E </tspan>
+		</text>
+	</g>
+
+	<g class="text-box" transform="translate(530, 165)">
+		<rect style="stroke: red; fill: white" x="0" y="0" width="30" height="40"/>
+		<text x="10" y="25">
+			<tspan> M </tspan>
+		</text>
+	</g>
+
+	<g class="text-box" transform="translate(530, 125)">
+		<rect style="stroke: red; fill: white" x="0" y="0" width="30" height="40"/>
+		<text x="10" y="25">
+			<tspan> WB </tspan>
+		</text>
+	</g>
+
+	<g class="text-box" transform="translate(830, 205)">
+		<rect style="stroke: red; fill: white" x="0" y="0" width="30" height="40"/>
+		<text x="10" y="25">
+			<tspan> M </tspan>
+		</text>
+	</g>
+
+	<g class="text-box" transform="translate(830, 165)">
+		<rect style="stroke: red; fill: white" x="0" y="0" width="30" height="40"/>
+		<text x="10" y="25">
+			<tspan> WB </tspan>
+		</text>
+	</g>
+
+	<g class="text-box" transform="translate(1130, 205)">
+		<rect style="stroke: red; fill: white" x="0" y="0" width="30" height="40"/>
+		<text x="10" y="25">
+			<tspan> WB </tspan>
+		</text>
+	</g>
+
+	<!-- AND LOGICO -->
+	<g class="text-box" transform="translate(950, 300)">
+		<rect style="stroke: red; fill: white; rx: 5; ry: 30" x="0" y="0" width="25" height="25"/>
+		<text x="2" y="17">
+			<tspan> AND </tspan>
+		</text>
+	</g>
+
 	<!--Unidade de controle-->
 	<g class="text-box" transform="translate(400, 150)">
 		<rect style="stroke: red; fill: white; rx: 50; ry: 50" x="0" y="0" width="75" height="100"/>
@@ -343,6 +394,16 @@
 			<tspan> Control </tspan>
 		</text>
 	</g>
+
+	<path style="stroke: red; stroke-width: 3" class="divby espera peso" id="UC_EIDEX" d="M 470 225 h 60"></path>
+	<path style="stroke: red; stroke-width: 3" class="divby espera peso" id="UC_MIDEX" d="M 472 185 h 57"></path>
+	<path style="stroke: red; stroke-width: 3" class="divby espera peso" id="UC_WBIDEX" d="M 460 160 h 40 v -15 h 30"></path>
+
+	<path style="stroke: red; stroke-width: 3" class="divby espera peso" id="MIDEX_MEXMEM" d="M 560 185 h 250 v 40 h 20"></path>
+	<path style="stroke: red; stroke-width: 3" class="divby espera peso" id="WBIDEX_MEXMEM" d="M 560 140 h 260 v 45 h 10"></path>
+	<path style="stroke: red; stroke-width: 3" class="divby espera peso" id="EIDEX_AC" d="M 560 225 h 230 v 320 h -50 v -17"></path>
+	<path style="stroke: red; stroke-width: 2" class="divby espera peso" id="RegDest" d="M 560 215 h 240 v 345 h -100"></path>
+	<path style="stroke: red; stroke-width: 2" class="divby espera peso" id="ALUSrc" d="M 560 235 h 130 v 155"></path>
 
 	<!--ALU Control-->
 	<g class="text-box" transform="translate(710, 462)">
@@ -353,7 +414,11 @@
 		</text>
 	</g>
 
-	<path style="stroke: red; stroke-width: 2" class="divby espera peso" id="CONTROL_ALU" d="M 755 470 v -55"></path>
+
+	<path style="stroke: red; stroke-width: 2" class="divby espera peso" id="ACULA_EXMEM" d="M 770 380 h 50"></path>
+	<path style="stroke: red; stroke-width: 3" class="divby espera peso" id="AC_ALU" d="M 755 470 v -55"></path>
+
+	
 
 
 	<!-- FIM SINAIS E UNIDADE DE CONTROLE-->
