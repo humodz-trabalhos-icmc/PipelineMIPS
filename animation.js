@@ -67,16 +67,22 @@ function onReady() {
 
     $('path').each(function(idx, elem) {
         elem = $(elem);
-        let classes = elem
-            .attr('class')
+        let classes = elem.attr('class');
+
+        if(classes === undefined) {
+            return;
+        }
+
+        classes = classes
              .split(' ')
              .filter((str) => str !== '');
 
 
         let wait = 0;
         let weight = divisions;
+        let ignore = true;
 
-        $.each(classes, function(i, theClass) {
+        classes.forEach(function(theClass) {
             let re = /([a-z]+)(\d+)/g;
 
             let matches = re.exec(theClass);
@@ -88,15 +94,19 @@ function onReady() {
             let value = +matches[2];
 
             if(name == 'espera') {
+                ignore = false;
                 wait = value;
             } else if(name === 'peso') {
+                ignore = false;
                 weight = value;
             }
         });
 
         let dur = total_dur * weight / divisions;
 
-        makeAnimatedCircle(elem.attr('id'), wait, dur);
+        if(!ignore) {
+            makeAnimatedCircle(elem.attr('id'), wait, dur);
+        }
     });
 }
 
