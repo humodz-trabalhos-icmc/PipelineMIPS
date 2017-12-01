@@ -102,17 +102,18 @@
       <!-- Pra reposicionar, so precisa alterar os parametros do translate -->
       <rect x="-30" y="0" width="60" height="300"/>
 		<text text-anchor="middle" class="text-variables" x="0" y="25">
-			<tspan x="0">IR</tspan>
-			<tspan id="IFID_IR_VALUE"x="0" dy="1.5em">10</tspan>
-			<tspan x="0" dy="1.5em">NPC</tspan>
-			<tspan id="IFID_NPC_VALUE" x="0" dy="1.5em">10</tspan>
+			<tspan x="0" dy="0">NPC</tspan>
+			<tspan x="0" dy="1.5em" id="if_id-newPc">???</tspan>
+			<tspan x="0" dy="1.5em" visibility="hidden">.</tspan>
 		</text>
+
 		<g transform="translate(25, 150) rotate(90)">
 			<rect x="0" y="10" width="130" height="30"/>
 			<text x="10" y="30">
-				<tspan id="IFIDInst"> ADD $R2 $R0 $R1 </tspan>
+				<tspan id="if_id-ir">???</tspan>
 			</text>
-		</g>
+    </g>
+
 	  <text text-anchor="middle" x="0" y="295">
 		  <tspan> IF/ID </tspan>
 	  </text>
@@ -160,19 +161,18 @@
 	<g class="text-box" transform="translate(550, 250)">
       <rect x="-30" y="0" width="60" height="300"/>
 		<text text-anchor="middle" class="text-variables" x="0" y="25">
-			<tspan x="0">a:</tspan>
-			<tspan id="IDEX_a_VALUE" x="0" dy="1.5em">10</tspan>
-			<tspan x="0" dy="1.5em">b:</tspan>
-			<tspan id="IDEX_b_VALUE" x="0" dy="1.5em">10</tspan>
-			<tspan x="0" dy="1.5em">IR</tspan>
-			<tspan id="IDEX_IR_VALUE" x="0" dy="1.5em">10</tspan>
-			<tspan x="0" dy="1.5em">NPC</tspan>
-			<tspan id="IDEX_NPC_VALUE" x="0" dy="1.5em">10</tspan>
+			<tspan x="0" dy="0">NPC</tspan>
+			<tspan id="id_ex-newPc" x="0" dy="1.5em">???</tspan>
+			<tspan x="0" dy="1.5em">a</tspan>
+			<tspan id="id_ex-a" x="0" dy="1.5em">???</tspan>
+			<tspan x="0" dy="1.5em">b</tspan>
+			<tspan id="id_ex-b" x="0" dy="1.5em">???</tspan>
+			<tspan x="0" dy="1.5em" visibility="hidden">.</tspan>
 		</text>
 		<g transform="translate(25, 150) rotate(90)">
 			<rect x="0" y="10" width="130" height="30"/>
 			<text x="10" y="30">
-				<tspan id="IDEXInst"> ADD $R2 $R0 $R1 </tspan>
+				<tspan id="id_ex-ir">???</tspan>
 			</text>
 		</g>
 	  <text text-anchor="middle" x="0" y="295">
@@ -258,14 +258,19 @@
       <rect x="-30" y="0" width="60" height="300"/>
 		<text text-anchor="middle" class="text-variables" x="0" y="25">
 			<tspan x="0">AluOut</tspan>
-			<tspan id="EXMEM_ALUOUT_VALUE" x="0" dy="1.5em">10</tspan>
-			<tspan x="0" dy="1.5em">IR</tspan>
-			<tspan id="EXMEM_IR_VALUE" x="0" dy="1.5em">10</tspan>
+			<tspan id="ex_mem-aluOutput" x="0" dy="1.5em">???</tspan>
+			<tspan x="0" dy="1.5em">zero</tspan>
+			<tspan id="ex_mem-zero" x="0" dy="1.5em">???</tspan>
+			<tspan x="0" dy="1.5em">b</tspan>
+			<tspan id="ex_mem-b" x="0" dy="1.5em">???</tspan>
+			<tspan x="0" dy="1.5em">bAddress</tspan>
+			<tspan id="ex_mem-branchAddress" x="0" dy="1.5em">???</tspan>
+			<tspan x="0" dy="1.5em" visibility="hidden">.</tspan>
 		</text>
 		<g transform="translate(25, 150) rotate(90)">
 			<rect x="0" y="10" width="130" height="30"/>
 			<text x="10" y="30">
-				<tspan id="EXMEMInst"> ADD $R2 $R0 $R1 </tspan>
+				<tspan id="ex_mem-ir">???</tspan>
 			</text>
 		</g>
 	  <text text-anchor="middle" x="0" y="295">
@@ -304,14 +309,15 @@
       <rect x="-30" y="0" width="60" height="300"/>
 		<text text-anchor="middle" class="text-variables" x="0" y="25">
 			<tspan x="0">AluOut</tspan>
-			<tspan id="MEMWB_ALUOUT_VALUE" x="0" dy="1.5em">10</tspan>
-			<tspan x="0" dy="1.5em">IR</tspan>
-			<tspan id="MEMWB_IR_VALUE" x="0" dy="1.5em">10</tspan>
+			<tspan id="mem_wb-aluOutput" x="0" dy="1.5em">???</tspan>
+			<tspan x="0" dy="1.5em">LMD</tspan>
+			<tspan id="mem_wb-lmd" x="0" dy="1.5em">???</tspan>
+			<tspan x="0" dy="1.5em" visibility="hidden">.</tspan>
 		</text>
 		<g transform="translate(25, 150) rotate(90)">
 			<rect x="0" y="10" width="130" height="30"/>
 			<text x="10" y="30">
-				<tspan id="MEMWBInst"> ADD $R2 $R0 $R1 </tspan>
+				<tspan id="mem_wb-ir">???</tspan>
 			</text>
 		</g>
 	  <text text-anchor="middle" x="0" y="295">

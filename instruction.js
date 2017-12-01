@@ -28,8 +28,8 @@ var _opcodes = {
 
     ADDI: new OpInfo('alu', 'i', (a, b) => a + b),
 
-    LW: new OpInfo('loadStore', 'i'),
-    SW: new OpInfo('loadStore', 'i'),
+    LW: new OpInfo('loadStore', 'i', (a, b) => a + b),
+    SW: new OpInfo('loadStore', 'i', (a, b) => a + b),
 
     // Branches are taken when alu result is zero
     BEQ: new OpInfo('branch', 'i', (a, b) => Number(a !== b)),
@@ -39,10 +39,10 @@ var _opcodes = {
 
 class Instruction {
     constructor(string) {
+        string = string.toUpperCase();
         let array = string
             .split(' ')
-            .filter((str) => str !== '')
-            .map((str) => str.toUpperCase());
+            .filter((str) => str !== '');
 
         this.asText = string;
         this.op = array[0];
@@ -87,5 +87,9 @@ class Instruction {
             console.log('Unrecognized instruction:', string);
             Object.assign(this, new Instruction('NOP'));
         }
+    }
+
+    toString() {
+        return this.asText;
     }
 }

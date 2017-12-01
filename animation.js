@@ -2,8 +2,24 @@
 // jshint globalstrict: true
 // jshint devel: true
 // jshint browser: true
-/* globals $ */
+/* globals $, Instruction, Cpu */
 'use strict';
+
+
+let cpu = new Cpu();
+
+cpu.dataMem = [111, 222, 333, 444];
+
+cpu.instructionMem = [
+    'LW $R0 4',
+    'LW $R1 12',
+    'NOP',
+    'NOP',
+    'ADD $R2 $R0 $R1',
+    'NOOP',
+    'NOOP',
+    'SW $R2 0'
+];
 
 
 let svg;
@@ -29,6 +45,11 @@ function activateAnimations() {
         }
     }, 500 + 1000 * total_dur);
 
+    setTimeout(function() {
+        cpu.update();
+        updateUi(cpu);
+    }, 1000 * total_dur);
+
     for(let i = 0; i <= divisions; i++) {
         setAnimTimeout(i);
     }
@@ -49,6 +70,8 @@ $(document).ready(onReady);
 
 function onReady() {
     svg = $('svg');
+    updateUi(cpu);
+
 
     $('#stepBtn').click(function() {
         activateAnimations();
@@ -137,3 +160,22 @@ function makeSvg(tag, attrs) {
     }
     return el;
 }
+
+
+function updateUi(cpu) {
+    let stages = {
+        'if_id': ['ir', 'newPc'],
+        'id_ex': ['ir', 'newPc', 'a', 'b'],
+        'ex_mem': ['ir', 'aluOutput', 'b', 'zero', 'branchAddress'],
+        'mem_wb': ['ir', 'aluOutput', 'lmd'],
+    };
+
+    $.each(stages, function(stage, fields) {
+        fields.forEach(function(field) {
+            let elem = $('#' + stage + '-' + field);
+            let value = cpu[stage][field];
+            elem.text(value);
+        });
+    });
+}
+

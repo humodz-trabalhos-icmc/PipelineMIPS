@@ -23,8 +23,8 @@ class Cpu {
             let nop = new Instruction('NOP');
 
             this.if_id = {ir: nop, newPc: 0,};
-            this.id_ex = {ir: nop, a: 0, b: 0,};
-            this.ex_mem = {ir: nop, aluOutput: 0, zero: 0, branchAddress: 0,};
+            this.id_ex = {ir: nop, newPc: 0, a: 0, b: 0};
+            this.ex_mem = {ir: nop, aluOutput: 0, b: 0, zero: 0, branchAddress: 0,};
             this.mem_wb = {ir: nop, aluOutput: 0, lmd: 0,};
         } else {
             // Copy attributes from @that
@@ -144,6 +144,8 @@ class Cpu {
     updateEx(prev) {
         console.log(prev.id_ex.ir.asText);
         this.ex_mem.ir = prev.id_ex.ir;
+        this.ex_mem.branchAddress = 0;
+
         let category = prev.id_ex.ir.category;
 
         if(category === 'alu') {
@@ -158,6 +160,7 @@ class Cpu {
         } else {
             console.log('Unrecognized op: ', prev.id_ex.ir);
         }
+        this.ex_mem.zero = Number(this.ex_mem.aluOutput === 0);
 
         console.log(this.ex_mem);
         return this;
@@ -178,6 +181,7 @@ class Cpu {
 
     updateExLoadStore(prev) {
         this.ex_mem.aluOutput = prev.id_ex.a + prev.id_ex.imm;
+
         this.ex_mem.b = prev.id_ex.b;
         return this;
     }
@@ -187,7 +191,6 @@ class Cpu {
         let b = prev.id_ex.b;
 
         this.ex_mem.aluOutput = prev.id_ex.ir.aluFunction(a, b);
-        this.ex_mem.zero = Number(this.ex_mem.aluOutput === 0);
 
         this.ex_mem.branchAddress = prev.id_ex.newPc + (prev.id_ex.imm << 2);
 
@@ -199,15 +202,18 @@ class Cpu {
         this.mem_wb.ir = prev.ex_mem.ir;
         let category = prev.ex_mem.ir.category;
 
+        this.mem_wb.aluOutput = prev.ex_mem.aluOutput;
+        this.mem_wb.lmd = prev.getMemoryPosition(prev.ex_mem.aluOutput);
+
         if(category === 'alu') {
             console.log('alu');
-            this.mem_wb.aluOutput = prev.ex_mem.aluOutput;
+            // Update aluOutput
         } else if(category === 'loadStore') {
             console.log('loadStore');
 
             let op = prev.ex_mem.ir.op;
             if(op === 'LW') {
-                this.mem_wb.lmd = prev.getMemoryPosition(prev.ex_mem.aluOutput);
+                // Update LMD
             } else if(op === 'SW') {
                 this.setMemoryPosition(prev.ex_mem.aluOutput, prev.ex_mem.b);
             } else {
@@ -277,21 +283,5 @@ function banner(text) {
 
 // Divide by 4 and convert to integer
 function convertAddress(address) {
-    return (+address / 4) | 0;
-}
-
-
-// TODO for testing
-var a = new Cpu();
-a.dataMem = [100, 200, 300, 400];
-a.instructionMem = [
-    'ADDI $R0 $R0 1',
-    'NOOP',
-    'NOOP',
-    'BNE $R0 $0 -3',
-];
-
-function f() {
-    clear();
-    a.update();
+    return Math.floor((+address / 4) | 0);
 }
