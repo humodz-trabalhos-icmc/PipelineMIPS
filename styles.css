@@ -46,6 +46,17 @@ path {
 	//font-weight: bold;
 }
 
+.codebox rect {
+	stroke-width: 1;
+    fill: white;
+    rx: 0;
+    ry: 0;
+}
+
+.codebox .selection {
+	fill: lawngreen;
+}
+
 /*.text-box rect {
     stroke-width: 0;
     fill: white;
