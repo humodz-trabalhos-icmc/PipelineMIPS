@@ -43,7 +43,7 @@
 
     <!-- A aparencia dos elementos ta definida no CSS -->
 
-    <!-- ULA para incrementar o PC -->
+    <!-- ADD PC -->
     <g transform="translate(165, 325) scale(0.75)">
       <polygon points="-25,-50 -25,50 25,25, 25,-25"/>
     </g>
@@ -57,10 +57,11 @@
 
 	<path id="PC_MEMINST" d="M 90 335 v 100 h 30 v 0"></path>
 
-
+	<!-- somador 4 -->
 	<text x="110" y="315">
 		<tspan> 4 </tspan>
 	</text>
+
 	<path id="PC_ADDPC" d="M 80 335 v 0 h 65 v 0"></path>
 	<path id="INC_4" d="M 120 310 v 0 h 25 v 0"></path>	
 
@@ -72,6 +73,7 @@
 
 	<path id="MUX_PC" d="M 85 176 v 50 h -50 v 110 h 15"></path>	
 
+	<!--=======INICIO BLOCO IF/ID============-->
     <g class="text-box" transform="translate(250, 250)">
       <!-- Desenha um trapezio centrado nas coordenadas do translate(x, y) -->
       <!-- Pra reposicionar, so precisa alterar os parametros do translate -->
@@ -105,6 +107,7 @@
 	<path id="REGSa_IDEX" d="M 425 375 h 100"></path>
 	<path id="REGSb_IDEX" d="M 425 425 h 100"></path>
 
+	<!-- Extensor de sinal -->
 	<rect x="350" y="465" width="65" height="65"/>
 
 	<path id="IFID_OUT_SIGEXT" d="M 311 450 v 50 h 40"></path>
@@ -115,8 +118,9 @@
 
 	<path id="IFID_OUT_RD" d="M 311 535 v 10 h 210"></path>
 	
+	<!--=======FIM BLOCO IF/ID============-->
 
-
+	<!--=======INICIO BLOCO ID/EX============-->
 	<g class="text-box" transform="translate(550, 250)">
       <!-- Desenha um trapezio centrado nas coordenadas do translate(x, y) -->
       <!-- Pra reposicionar, so precisa alterar os parametros do translate -->
@@ -136,11 +140,12 @@
 	  </text>
     </g>
 
+	<!--ADD BRENCH -->
 	<g transform="translate(750, 290) scale(0.75)">
       <polygon points="-25,-50 -25,50 25,25, 25,-25"/>
     </g>
 
-
+	<!--==INICIO ELEMENTOS E LIGAÇÕES DO BLOCO ID/EX==-->
 	<path id="IDEX_EXMEM" d="M 600 405 v 55 h 219"></path>
 
 	<path id="IDEX_ADD" d="M 580 265 h 150"></path>
@@ -150,7 +155,8 @@
 	<path id="SHIFT_ADD" d="M 660 320 h 70"></path>
 
 	<path id="ADD_EXMEM" d="M 770 290 h 50"></path>
-
+	
+	<!-- ULA -->
 	<g transform="translate(750, 390) scale(0.75)">
       <polygon points="-25,-50 -25,50 25,25, 25,-25"/>
     </g>
@@ -171,15 +177,19 @@
 
 	<path id="ULA_EXMEM" d="M 770 390 h 50"></path>
 
+	<!-- MUX ULA -->
 	<rect x="675" y="390" width="30" height="65"/>
 
+	<!-- MUX RT RD-->
 	<rect x="675" y="500" width="30" height="65"/>
 
+	<!-- Shift Left 2 -->
 	<rect x="610" y="290" width="50" height="65"/>
 
+	<!--=======FIM BLOCO ID/EX============-->
+
+	<!--=======INICIO BLOCO EX/MEM============-->
 	<g class="text-box" transform="translate(850, 250)">
-      <!-- Desenha um trapezio centrado nas coordenadas do translate(x, y) -->
-      <!-- Pra reposicionar, so precisa alterar os parametros do translate -->
       <rect x="-30" y="0" width="60" height="300"/>
 		<text text-anchor="middle" class="text-variables" x="0" y="25">
 			<tspan x="0" dy="1.2em">AluOut</tspan>
@@ -196,6 +206,7 @@
 	  </text>
     </g>
 
+	<!--==INICIO ELEMENTOS E LIGAÇÕES DO BLOCO EX/MEM==-->
 	<path id="MUX_EXMEM" d="M 880 530 h 240"></path>
 
 	<path id="EXMEM_DMEMa" d="M 880 390 h 70"></path>
@@ -211,9 +222,10 @@
 
 	<path id="EXMEN_MUX" d="M 880 265 h 50 v -200 h -860 v 80"></path>
 
+	<!--=======FIM BLOCO EX/MEM============-->
+
+	<!--=======INICIO BLOCO MEM/WB============-->
 	<g class="text-box" transform="translate(1150, 250)">
-      <!-- Desenha um trapezio centrado nas coordenadas do translate(x, y) -->
-      <!-- Pra reposicionar, so precisa alterar os parametros do translate -->
       <rect x="-30" y="0" width="60" height="300"/>
 		<text text-anchor="middle" class="text-variables" x="0" y="25">
 			<tspan x="0" dy="1.2em">AluOut</tspan>
@@ -230,16 +242,19 @@
 	  </text>
     </g>
 
+	<!--==INICIO ELEMENTOS E LIGAÇÕES DO BLOCO MEM/WB==-->
 	<path id="MEMWB_MUXa" d="M 1180 390 h 40"></path>
 
 	<path id="MEMWB_MUXb" d="M 1180 490 h 20 v -65 h 20"></path>
 
+	<!-- MUX -->
 	<rect x="1220" y="370" width="30" height="65"/>
 
 	<path id="MUX_REGS" d="M 1250 400h 30 v 190 h -940 v -150 h 10"></path>
 
 	<path id="MEMWB_REGS" d="M 1180 530 h 20 v 40 h -880 v -140 h 30"></path>
 
+	<!--=======FIM BLOCO MEM/WB============-->
 
     <!-- Retangulos p/ fazer as memorias e o banco de registradores -->
     <!--<rect x="100" y="100" width="100" height="100"/>
