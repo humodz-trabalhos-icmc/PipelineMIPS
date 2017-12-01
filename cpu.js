@@ -91,7 +91,7 @@ class Cpu {
         let prev = this;
         let next = new Cpu(this);
 
-        // WB happens first to deal with structural hazards (register/memory)
+        // WB happens first to update registers
         banner('WB');
         next.updateWb(prev);
 
