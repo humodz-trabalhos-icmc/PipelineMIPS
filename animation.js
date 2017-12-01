@@ -20,8 +20,8 @@ function makeCircle(pathId, classes) {
     classes = classes || "";
     classes = "anim " + classes;
 
-    let circle = makeSvg('circle', {'class': classes,});
-    let animMotion = makeSvg('animateMotion', {});
+    let circle = makeSvg('circle', {'class': classes, visibility: 'hidden'});
+    let animMotion = makeSvg('animateMotion', {begin: 'indefinite'});
     let mpath = makeSvg('mpath', {});
 
     mpath.setAttributeNS("http://www.w3.org/1999/xlink", "href", pathId);
@@ -30,7 +30,7 @@ function makeCircle(pathId, classes) {
     circle.appendChild(animMotion);
     svg.append(circle);
 
-    return circle;
+    return animMotion;
 }
 
 
@@ -40,6 +40,16 @@ function Path(id) {
 
 
 $(document).ready(function () {
+    let max_division = 5;
+
+    for(let i = 1; i <= max_division; i++) {
+        let paths = $('path.divby' + i);
+
+
+    }
+});
+
+function old() {
     var paths = [
         Path('#MEMINST_IFID'),
         Path('#PC_MEMINST'),
@@ -83,19 +93,24 @@ $(document).ready(function () {
         Path('#MEMWB_REGS'),
     ];
 
-
     paths.forEach(function(path) {
         makeCircle(path.id);
     });
 
 
     $('.anim animateMotion').attr({
-        begin: 'o1.begin',
+        begin: 'indefinite',
         dur: '2s',
         fill: 'freeze',
-        //repeatCount: 'indefinite'
     });
-});
+}
+
+
+function go() {
+    let circles = $('circle.anim');
+
+    circles.attr('visibity', 'visible');
+}
 
 
 
