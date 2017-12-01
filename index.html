@@ -87,7 +87,7 @@
 
 	<!--mux-->
 	<g class="text-box" transform="translate(50, 145)">
-		<rect x="0" y="0" width="75" height="30"/>
+		<rect style="rx: 20; ry: 20" x="0" y="0" width="75" height="30"/>
 		<text x="25" y="20">
 			<tspan> MUX </tspan>
 		</text>
@@ -221,7 +221,7 @@
 
 	<!-- MUX ULA -->
 	<g class="text-box" transform="translate(675, 390)">
-		<rect x="0" y="0" width="30" height="65"/>
+		<rect style="rx: 20; ry: 20" x="0" y="0" width="30" height="65"/>
 		<text x="5" y="35">
 			<tspan> MUX </tspan>
 		</text>
@@ -229,7 +229,7 @@
 
 	<!-- MUX RT RD-->
 	<g class="text-box" transform="translate(675, 500)">
-		<rect x="0" y="0" width="30" height="65"/>
+		<rect style="rx: 20; ry: 20" x="0" y="0" width="30" height="65"/>
 		<text x="5" y="35">
 			<tspan> MUX </tspan>
 		</text>
@@ -321,7 +321,7 @@
 
 	<!-- MUX -->
 	<g class="text-box" transform="translate(1220, 370)">
-		<rect x="0" y="0" width="30" height="65"/>
+		<rect style="rx: 20; ry: 20" x="0" y="0" width="30" height="65"/>
 		<text x="5" y="35">
 			<tspan> MUX </tspan>
 		</text>
@@ -336,13 +336,24 @@
 
 	<!--INICIO SINAIS E UNIDADE DE CONTROLE-->
 
-	<!--memoria instrução-->
+	<!--Unidade de controle-->
 	<g class="text-box" transform="translate(400, 150)">
 		<rect style="stroke: red; fill: white; rx: 50; ry: 50" x="0" y="0" width="75" height="100"/>
 		<text " x="15" y="55">
 			<tspan> Control </tspan>
 		</text>
 	</g>
+
+	<!--ALU Control-->
+	<g class="text-box" transform="translate(710, 462)">
+		<rect style="stroke: red; fill: white; rx: 50; ry: 50" x="0" y="0" width="55" height="65"/>
+		<text " x="17" y="25">
+			<tspan> ALU </tspan>
+			<tspan x="2" dy="1.5em">Control</tspan>
+		</text>
+	</g>
+
+	<path style="stroke: red" class="divby espera peso" id="CONTROL_ALU" d="M 755 470 v -55"></path>
 
 
 	<!-- FIM SINAIS E UNIDADE DE CONTROLE-->
