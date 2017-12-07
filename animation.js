@@ -10,16 +10,7 @@ let cpu = new Cpu();
 
 cpu.dataMem = [111, 222, 333, 444];
 
-cpu.instructionMem = [
-    'LW $R0 4',
-    'LW $R1 12',
-    'NOP',
-    'NOP',
-    'ADD $R2 $R0 $R1',
-    'NOOP',
-    'NOOP',
-    'SW $R2 0'
-];
+cpu.instructionMem = [ ];
 
 
 let svg;
@@ -71,6 +62,33 @@ $(document).ready(onReady);
 function onReady() {
     svg = $('svg');
     updateUi(cpu);
+
+
+    let defaultProgram = [
+        'LW $R0 4',
+        'LW $R1 12',
+        'NOP',
+        'NOP',
+        'ADD $R2 $R0 $R1',
+        'NOOP',
+        'NOOP',
+        'SW $R2 0'
+    ].join('\n');
+
+    $('#codeBox').html(defaultProgram);
+
+    $('#startSimBtn').click(function() {
+        let instructions = $('#codeBox')
+            .html()
+            .split('\n')
+            .map((str) => str.trim())
+            .filter((str) => str !== '');
+
+        cpu.instructionMem = instructions;
+
+        $('.first-screen').css('display', 'none');
+        $('.second-screen').css('display', 'inline-block');
+    });
 
 
     $('#stepBtn').click(function() {
