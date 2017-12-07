@@ -10,6 +10,13 @@
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
+  <div class="first-screen">
+    <textarea id="asm-text" rows="30" cols="50"></textarea>
+    <br>
+    <input id="start-simulator" type="button" value="Prosseguir">
+  </div>
+
+  <div class="second-screen">
   <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlns:html="http://www.w3.org/1999/xhtml"
@@ -452,7 +459,7 @@
 
 
 	<g class="codebox" transform="translate(2, 480)">
-		<rect text-anchor="middle" ry: 50" x="0" y="0" width="150" height="120"/>
+		<rect text-anchor="middle" ry: "50" x="0" y="0" width="150" height="120"/>
 		<text  x="17" y="25">
 			<tspan> add $r2 $r0 $r1 </tspan>
 		</text>
@@ -466,6 +473,7 @@
     <input type="button" id="playBtn" value="Animar">
     <input type="button" id="stopBtn" value="Pausar">
     <input type="button" id="stepBtn" value="Avançar um ciclo">
+  </div>
   </div>
 
   <script src="instruction.js"></script>

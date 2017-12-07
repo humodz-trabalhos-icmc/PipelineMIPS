@@ -1,3 +1,21 @@
+.first-screen {
+    display: block;
+    text-align: center;
+    margin: auto;
+}
+
+.second-screen {
+    display: none;
+}
+
+#line-numbers, textarea {
+    vertical-align: text-top;
+    display: inline-block;
+    font-size: 12px;
+    font-family: monospace
+
+}
+
 svg {
     border: 1px solid black;
     background: lavender;
