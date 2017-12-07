@@ -7,8 +7,33 @@
 
 class Cpu {
     constructor(that) {
-        if(that === undefined) {
-            // Create new Cpu object
+        let nop = new Instruction('NOP');
+
+        this.if_id = {ir: nop, newPc: 0,};
+        this.id_ex = {ir: nop, newPc: 0, a: 0, b: 0};
+        this.ex_mem = {ir: nop, aluOutput: 0, b: 0, zero: 0, branchAddress: 0,};
+        this.mem_wb = {ir: nop, aluOutput: 0, lmd: 0,};
+
+        if(that !== undefined) {
+            // Copy pc, registers, memory and intermediate IRs from @that
+            this.programCounter = that.programCounter;
+
+            this.registers = Object.assign({}, that.registers);
+
+            let arrays = ['instructionMem', 'dataMem'];
+
+            arrays.forEach((attr) => {
+                this[attr] = that[attr].slice();
+            });
+
+            let stages = ['if_id', 'id_ex', 'ex_mem', 'mem_wb'];
+
+            let new_cpu = this;
+            stages.forEach(function(stage) {
+                new_cpu[stage].ir = that[stage].ir;
+            });
+        } else {
+            // Create empty pc, register and memory
             this.programCounter = 0;
             this.registers = {};
             this.instructionMem = [];
@@ -19,27 +44,6 @@ class Cpu {
             for(let i = 0; i < numRegisters; i++) {
                 this.registers['$R' + i] = 0;
             }
-
-            let nop = new Instruction('NOP');
-
-            this.if_id = {ir: nop, newPc: 0,};
-            this.id_ex = {ir: nop, newPc: 0, a: 0, b: 0};
-            this.ex_mem = {ir: nop, aluOutput: 0, b: 0, zero: 0, branchAddress: 0,};
-            this.mem_wb = {ir: nop, aluOutput: 0, lmd: 0,};
-        } else {
-            // Copy attributes from @that
-            this.programCounter = that.programCounter;
-
-            let arrays = ['instructionMem', 'dataMem'];
-            let objects = ['registers', 'if_id', 'id_ex', 'ex_mem', 'mem_wb'];
-
-            arrays.forEach((attr) => {
-                this[attr] = that[attr].slice();
-            });
-
-            objects.forEach((attr) => {
-                this[attr] = Object.assign({}, that[attr]);
-            });
         }
     }
 
