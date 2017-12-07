@@ -14,13 +14,14 @@ cpu.instructionMem = [ ];
 
 
 let svg;
-let total_dur = 3;
-let divisions = 12;
+let cycleDurationSeconds = 3;  // Duração de um ciclo de clock em segundos
+let divisions = 12;  // Divisões de tempo para controlar a lógica da animação
 
-let isPlaying = false;
-let doingOneStep = false;
+let isPlaying = false;  // True se é para animar indefinidamente
+let doingOneStep = false;  // True se está no meio de uma animação de clock
 
 
+// Executa as animaçoes baseado nas variáveis acima
 function activateAnimations() {
     if(doingOneStep) {
         return;
@@ -28,19 +29,22 @@ function activateAnimations() {
 
     doingOneStep = true;
 
+    // Callback para quando o clico terminar, com um delay extra de 500ms
     setTimeout(function() {
         doingOneStep = false;
 
         if(isPlaying) {
             activateAnimations();
         }
-    }, 500 + 1000 * total_dur);
+    }, 500 + 1000 * cycleDurationSeconds);
 
+    // Callback para atualizar os dados da interface gráfica
     setTimeout(function() {
         cpu.update();
         updateUi(cpu);
-    }, 1000 * total_dur);
+    }, 1000 * cycleDurationSeconds);
 
+    // Faz as bolinhas animarem no tempo certo
     for(let i = 0; i <= divisions; i++) {
         setAnimTimeout(i);
     }
@@ -53,7 +57,7 @@ function setAnimTimeout(wait) {
         $('.anim' + wait).each(function(i, elem) {
             elem.beginElement();
         });
-    }, 1000 * total_dur * wait / divisions);
+    }, 1000 * cycleDurationSeconds * wait / divisions);
 }
 
 
@@ -64,6 +68,7 @@ function onReady() {
     updateUi(cpu);
 
 
+    // Código exemplo que aparece por padrão na primeira tela
     let defaultProgram = [
         'LW $R0 4',
         'LW $R1 12',
@@ -78,6 +83,7 @@ function onReady() {
     $('#codeBox').html(defaultProgram);
 
     $('#startSimBtn').click(function() {
+        // Pega o conteudo do codebox, dividindo em linhas e descartando linhas vazias
         let instructions = $('#codeBox')
             .html()
             .split('\n')
@@ -86,6 +92,7 @@ function onReady() {
 
         cpu.instructionMem = instructions;
 
+        // Troca o conteudo da página
         $('.first-screen').css('display', 'none');
         $('.second-screen').css('display', 'inline-block');
     });
@@ -106,7 +113,16 @@ function onReady() {
 
 
 
+    // Cria as bolinhas vermelhas que fazem a animação em si
+    // Enquanto nao estão animando, ficam paradas no canto superior esquerdo
     $('path').each(function(idx, elem) {
+        // Lógica da animação:
+        // O ciclo é quebrado em 12 divisões
+        // Os objetos path devem ter duas classes, esperaX e pesoY (X, Y de 0 a 12)
+        // esperaX indica que a bolinha deve esperar X divisões de tempo para começar a animar
+        // pesoY indica quantas divisões dura a animação
+
+
         elem = $(elem);
         let classes = elem.attr('class');
 
@@ -114,16 +130,20 @@ function onReady() {
             return;
         }
 
+        // Quebra por espaços e descarta strings vazias
         classes = classes
              .split(' ')
              .filter((str) => str !== '');
 
 
+        // Descobre X e Y do "esperaX pesoY" do path atual
         let wait = 0;
         let weight = divisions;
-        let ignore = true;
+        let ignore = true;  // Se for true, quer dizer que o objeto path nao tem uma classe valida
+
 
         classes.forEach(function(theClass) {
+            // Expressao regular para ler esperaX e pesoY separando a palavra do número
             let re = /([a-z]+)(\d+)/g;
 
             let matches = re.exec(theClass);
@@ -143,9 +163,11 @@ function onReady() {
             }
         });
 
-        let dur = total_dur * weight / divisions;
+        let dur = cycleDurationSeconds * weight / divisions;
 
+        // Nao coloca bolinha nos paths que nao têm esperaX e/ou pesoY
         if(!ignore) {
+            // Cria o elemento svg do circulo, que anda por cima do path
             makeAnimatedCircle(elem.attr('id'), wait, dur);
         }
     });
@@ -154,6 +176,13 @@ function onReady() {
 
 function makeAnimatedCircle(pathId, wait, dur) {
     let circle = makeSvg('circle', {});
+
+    // Exemplo de svg gerado para pathId="MUX_ULA", wait=3, dur=5
+    // <circle>
+    //   <animateMotion class="anim3" begin="indefinite" dur="5s">
+    //     <mpath xlink:href="#MUX_ULA"/>
+    //   </animateMotion>
+    // </circle>
 
     let animMotion = makeSvg('animateMotion', {
         'class': 'anim' + wait,
