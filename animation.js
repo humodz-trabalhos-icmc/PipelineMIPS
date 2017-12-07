@@ -177,5 +177,14 @@ function updateUi(cpu) {
             elem.text(value);
         });
     });
+
+	for(let i = 0; i < 4; i++) {
+		$("#R"+i).text(cpu.registers['$R'+i]);
+	}
+
+	for(let i = 0; i < 4; i++) {
+		$("#MEM"+(i*4)).text(cpu.dataMem[i]);
+	}
+
 }
 
