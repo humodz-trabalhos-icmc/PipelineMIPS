@@ -64,7 +64,7 @@ function onReady() {
     updateUi(cpu);
 
 
-    let default_asm = [
+    let defaultProgram = [
         'LW $R0 4',
         'LW $R1 12',
         'NOP',
@@ -75,10 +75,10 @@ function onReady() {
         'SW $R2 0'
     ].join('\n');
 
-    $('#asm-text').html(default_asm);
+    $('#codeBox').html(defaultProgram);
 
-    $('#start-simulator').click(function() {
-        let instructions = $('#asm-text')
+    $('#startSimBtn').click(function() {
+        let instructions = $('#codeBox')
             .html()
             .split('\n')
             .map((str) => str.trim())
