@@ -170,7 +170,7 @@ function makeAnimatedCircle(pathId, wait, dur) {
     svg.append(circle);
 }
 
-
+//cria uma tag SVG com os atributos especificados na variavel attrs
 function makeSvg(tag, attrs) {
     var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
     for(var k in attrs) {
@@ -179,7 +179,7 @@ function makeSvg(tag, attrs) {
     return el;
 }
 
-
+//atualiza valores do pipeline na interface grafica
 function updateUi(cpu) {
     let stages = {
         'if_id': ['ir', 'newPc'],
