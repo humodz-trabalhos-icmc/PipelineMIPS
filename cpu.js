@@ -3,6 +3,11 @@
 // jshint devel: true
 // jshint browser: true
 /* globals Instruction, clear */
+
+/* Hugo Moraes Dzin    - 8532186
+ * Luiz Eduardo Dorici - 4165850
+ */
+
 'use strict';
 
 class Cpu {

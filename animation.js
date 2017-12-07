@@ -3,6 +3,11 @@
 // jshint devel: true
 // jshint browser: true
 /* globals $, Instruction, Cpu */
+
+/* Hugo Moraes Dzin    - 8532186
+ * Luiz Eduardo Dorici - 4165850
+ */
+
 'use strict';
 
 
@@ -44,14 +49,13 @@ function activateAnimations() {
         updateUi(cpu);
     }, 1000 * cycleDurationSeconds);
 
-    // Faz as bolinhas animarem no tempo certo
     for(let i = 0; i <= divisions; i++) {
         setAnimTimeout(i);
     }
 
 }
 
-
+// Faz as bolinhas animarem no tempo certo
 function setAnimTimeout(wait) {
     return setTimeout(function() {
         $('.anim' + wait).each(function(i, elem) {

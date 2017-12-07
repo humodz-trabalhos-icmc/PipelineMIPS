@@ -4,6 +4,10 @@
 // jshint browser: true
 'use strict';
 
+/* Hugo Moraes Dzin    - 8532186
+ * Luiz Eduardo Dorici - 4165850
+ */
+
 // Objeto que guarda informações das instruções
 // o conteudo dele será copiado para o objeto Instruction
 class OpInfo {
