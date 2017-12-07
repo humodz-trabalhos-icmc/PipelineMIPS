@@ -4,11 +4,12 @@
 // jshint browser: true
 'use strict';
 
-
+// Objeto que guarda informações das instruções
+// o conteudo dele será copiado para o objeto Instruction
 class OpInfo {
     constructor(category, format, aluFunction) {
-        this.category = category;
-        this.format = format;
+        this.category = category; // category = alu, loadStore ou branch
+        this.format = format; //formato da instrução
         this.aluFunction = aluFunction || noop;
     }
 }
@@ -18,9 +19,9 @@ function noop(a, b) {
     return 0;
 }
 
-
+// dicionario que guarda informações sobre a instrução
 var _opcodes = {
-    NOP: new OpInfo('alu', 'r', noop),
+    NOP:  new OpInfo('alu', 'r', noop),
     ADD:  new OpInfo('alu', 'r', (a, b) => a + b),
     SUB:  new OpInfo('alu', 'r', (a, b) => a - b),
     AND:  new OpInfo('alu', 'r', (a, b) => a & b),
@@ -36,7 +37,8 @@ var _opcodes = {
     BNE: new OpInfo('branch', 'i', (a, b) => Number(a === b)),
 };
 
-
+// interpreta uma string com uma instrução ex: add $r0 $r1 $r2
+// e armazena as informações necessarias para o processador executar 
 class Instruction {
     constructor(string) {
         string = string.toUpperCase();

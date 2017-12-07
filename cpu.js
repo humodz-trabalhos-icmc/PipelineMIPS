@@ -47,6 +47,7 @@ class Cpu {
         }
     }
 
+	// DEBUG ONLY
     setNextInstruction(instruction) {
         let pc = this.if_id.programCounter;
         this.instructionMem[pc + 1] = instruction;
@@ -85,6 +86,7 @@ class Cpu {
         this.dataMem[address] = +value;
     }
 
+	// avança um ciclo de clock
     update() {
         let next = this.nextState();
         Object.assign(this, next);
@@ -278,7 +280,7 @@ class Cpu {
     }
 }
 
-
+// DEBUG ONLY
 function banner(text) {
     let bars = Array(10).join('=');
     console.log(bars, text, bars);
