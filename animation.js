@@ -84,12 +84,12 @@ function onReady() {
         'SW $R2 0'
     ].join('\n');
 
-    $('#codeBox').html(defaultProgram);
+    $('#codeBox').val(defaultProgram);
 
     $('#startSimBtn').click(function() {
         // Pega o conteudo do codebox, dividindo em linhas e descartando linhas vazias
         let instructions = $('#codeBox')
-            .html()
+            .val()
             .split('\n')
             .map((str) => str.trim())
             .filter((str) => str !== '');
